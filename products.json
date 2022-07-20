@@ -1,0 +1,113 @@
+{
+    "items": [
+      {
+        "sys": { "id": "1" },
+        "fields": {
+          "title": "Bretling watch",
+          "price": 9999,
+          "rite": "watch",
+          "image":  "image/Bretlingwatch.png" 
+        }
+      },
+      {
+        "sys": { "id": "2" },
+        "fields": {
+          "title": "Fossil watch",
+          "price": 4999,
+          "rite": "watch",
+          "image":  "image/fossil.webp" 
+        }
+      },
+      {
+        "sys": { "id": "3" },
+        "fields": {
+          "title": "Realme watch",
+          "price": 3999,
+          "rite": "watch",
+          "image":  "image/52c98624-390f-4aec-b3b2-9a8b81ad431f1611133634601-Realme-Unisex-Black-SpO2-Monitor-and-Large-Color-Touch-Scree-7.webp" 
+        }
+      },
+      {
+        "sys": { "id": "4" },
+        "fields": {
+          "title": "Premium shirt",
+          "price": 999,
+          "rite": "shirt",
+          "image":  "image/Shirt1.jpg" 
+        }
+      },
+      {
+        "sys": { "id": "5" },
+        "fields": {
+          "title": "lenin shirt",
+          "price": 1699,
+          "rite": "shirt",
+          "image":  "image/shirt2.webp" 
+        }
+      },
+      {
+        "sys": { "id": "6" },
+        "fields": {
+          "title": "Vimal shirt",
+          "price": 1999,
+          "rite": "shirt",
+          "image":  "image/shirt3.jpg_2000Wx3000H" 
+        }
+      },
+      {
+        "sys": { "id": "7" },
+        "fields": {
+          "title": "Premium blazer",
+          "price": 2999,
+          "rite": "blazer",
+          "image":  "image/blazer1.jpg" 
+        }
+      },
+      {
+        "sys": { "id": "8" },
+        "fields": {
+          "title": "Silk blazer",
+          "price": 9999,
+          "rite": "blazer",
+          "image":  "image/blazer2.jpg" 
+        }
+      },
+{
+    "sys": { "id": "9" },
+        "fields": {
+          "title": "Classic blazer",
+          "price": 19999,
+          "rite": "blazer",
+          "image":  "image/blazer3.jpg" 
+}
+},
+{
+    "sys": { "id": "10" },
+    "fields": {
+      "title": "FILA Shoes",
+      "price": 1999,
+      "rite": "shoes",
+      "image":  "image/shoesfila.jpg" 
+}
+},
+{
+    "sys": { "id": "11" },
+    "fields": {
+      "title": "Sparx shoes",
+      "price": 999,
+      "rite": "shoes",
+      "image":  "image/shoessparx.jpg" 
+}
+},
+{
+    "sys": { "id": "12" },
+    "fields": {
+      "title": "Puma shoes",
+      "price": 9999,
+      "rite": "shoes",
+
+      "image": "image/shoespuma.jpg" 
+}
+}
+    ]
+  }
