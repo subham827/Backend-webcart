@@ -51,9 +51,7 @@ app.post('/api/login', async (req, res) => {
 })
 
 // write a code to copy one array into another
- const arr1 = [1,2,3];
- const arr2 = arr1;
-    console.log(arr2);
+ 
  
 
 
@@ -79,6 +77,65 @@ app.post('/api/acart', async (req,res)=>{
         user.cart.push(req.body);
         await user.save();
         return res.json({status: 'ok', cart: user.cart});
+    } catch (error) {
+        console.log(error);
+        return res.json({status: 'error', error:"Invalid token"});
+        
+    }
+})
+app.put('/api/aqty',async (req,res)=>{
+    const token = req.headers['x-access-token'];
+    try {
+        const decoded = jwt.verify(token, 'secret');
+        const email = decoded.email;
+        const user = await UserCarts.findOne({email: email});
+        console.log(req.body);
+        user.cart.forEach(element => {
+            
+            if(element.prod.id === req.body.id){
+               
+                element.prod.quantity = req.body.quantity+1;   
+            }
+
+
+        }
+    
+        );
+        
+        await user.updateOne({cart: user.cart});
+        return res.json({status: 'ok', cart: user.cart});
+        
+    } catch (error) {
+        console.log(error);
+        return res.json({status: 'error', error:"Invalid token"});
+        
+    }
+})
+app.put('/api/dqty',async (req,res)=>{
+    const token = req.headers['x-access-token'];
+    try {
+        const decoded = jwt.verify(token, 'secret');
+        const email = decoded.email;
+        const user = await UserCarts.findOne({email: email});
+        console.log(req.body);
+        user.cart.forEach(element => {
+            
+            if(element.prod.id === req.body.id){
+                console.log(req.body + "pp");
+                if(element.prod.quantity > 1){
+                element.prod.quantity = req.body.quantity-1;
+                }
+               
+            }
+
+
+        }
+    
+        );
+        
+        await user.updateOne({cart: user.cart});
+        return res.json({status: 'ok', cart: user.cart});
+        
     } catch (error) {
         console.log(error);
         return res.json({status: 'error', error:"Invalid token"});
