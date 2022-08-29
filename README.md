@@ -1,3 +1,11 @@
+#Getting Started
+
+1. Install the necessary dependencies and react-scripts in the frontend.
+2. Install mongoDB compass 
+3 . npm run start in the frontend and cd backendapp and nodemon index.js in the terminal.
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
