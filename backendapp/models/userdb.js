@@ -1,16 +1,22 @@
 const mongoose = require('mongoose');
 
 const UserCarts = new mongoose.Schema({
-    name: {
-        type: String,
-        unique: true,
-        required: true
-    },
     email: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
+        validate: {
+            validator: function (v) {
+                return /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(v);
+            }
+        }
+
     },
+    name: {
+        type: String,
+        required: true
+    },
+    
     password: {
         type: String,
         required: true
