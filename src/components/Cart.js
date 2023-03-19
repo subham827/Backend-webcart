@@ -1,8 +1,13 @@
-
 import { ListGroup, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+
 
 const Cart = ({ carte, setCarte }) => {
+  console.log(carte)
+
   const increase = async (id, quantity) => {
     const req = await fetch(`http://localhost:8000/api/aqty`, {
       method: "PUT",
@@ -20,7 +25,13 @@ const Cart = ({ carte, setCarte }) => {
     setCarte(data.cart);
    
   };
+  
+  
   const decrease = async (id, quantity) => {
+    if(quantity == 1){
+      alert("If you want the product to be removed please remove it from home page");
+      return;
+    }
     const req = await fetch(`http://localhost:8000/api/dqty`, {
       method: "PUT",
       headers: {
@@ -42,8 +53,10 @@ const Cart = ({ carte, setCarte }) => {
 
   return (
     <div className="container d-flex">
-      <ListGroup>
-        {carte.length > 0 ? (
+      <Container>
+        <Row>
+          <Col>
+          {carte.length > 0 ? (
           carte.map((prod) => {
             return (
               <div>
@@ -71,7 +84,10 @@ const Cart = ({ carte, setCarte }) => {
         ) : (
           <div>No items in cart</div>
         )}
-      </ListGroup>
+          </Col>
+        </Row>
+      
+      </Container>
 
       <h2>Total : Rs {sum}</h2>
 
