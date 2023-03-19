@@ -26,6 +26,9 @@ function Signup() {
     if(data.status === 'ok'){
        history.push('/login'); 
     }
+    else{
+      alert(data.error);
+    }
    
   }
   
