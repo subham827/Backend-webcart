@@ -4,12 +4,11 @@ import { Container,Navbar,Nav,Badge,Dropdown,Button } from "react-bootstrap"
 import { FaShoppingCart } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import { CartState } from '../Context/Context'
-import Cart from './Cart'
-import { useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { FormControl } from 'react-bootstrap'
 import "../style/index.css";
 const Header = ({carte,setLog,name}) => {
+  
     const {
         state: { cart },
         productState : { searchQuery },
@@ -19,13 +18,11 @@ const Header = ({carte,setLog,name}) => {
     const logout = ()=>{
        localStorage.clear()
          window.location.reload() 
+       
          setLog(false)
 
     }
-    
-
   
-   
   return (
     <>
     <Navbar bg="dark" variant='dark' >
@@ -41,7 +38,7 @@ const Header = ({carte,setLog,name}) => {
                     {useLocation().pathname.split("/")[1] !== "cart" && (
           <Navbar.Text className="search">
             <FormControl
-              // style={{ width: 100 }}
+              
               type="search"
               placeholder="Search a product..."
               className="m-auto search"
@@ -63,13 +60,14 @@ const Header = ({carte,setLog,name}) => {
                             </Dropdown.Toggle>
                             <Dropdown.Menu>
                             {carte.length>0?(<>
+                              <Link to='/cart'>Checkout</Link>
                             {carte.map((prod) => {
                                  return (
                                     <div>
                                       <h3>{prod.prod.title}</h3>
                                       <img src={prod.prod.image} width="60px" ></img>
                                       <p>Rs. {prod.prod.price}</p>
-                                      {/* <Button onClick={()=>deleteitem(prod)}>Delete</Button> */}
+                                      
                                       <hr></hr>
                                       
                                     </div>
@@ -77,7 +75,6 @@ const Header = ({carte,setLog,name}) => {
                             })
                             }
                            
-                           <Link to='/cart'>Checkout</Link>
                            
                             </>):(<><span>Cart is Empty</span></>)}
                             </Dropdown.Menu>
@@ -87,7 +84,7 @@ const Header = ({carte,setLog,name}) => {
                     </Nav>
                    
                     
-                        <Nav><Button onClick={logout}>LogOut</Button></Nav>
+                        <Nav>{useLocation().pathname.split("/")[1] !== "cart" && (<Button onClick={logout}>Log out</Button>)}</Nav>
         </Container>
     </Navbar>
     </>
