@@ -1,5 +1,6 @@
 import {useState} from 'react';
 import { Link } from 'react-router-dom';
+import Toast from 'react-bootstrap/Toast';
 
 
 
@@ -24,13 +25,12 @@ function Login() {
     const data = await response.json();
     if (data.user) {
       localStorage.setItem('token',data.user);
-      alert("Login Successful");
       window.location.href = '/';
       
       
     }
     else{
-      alert("Login Failed");
+      alert("Invalid Credentials");
     }
    
   }
