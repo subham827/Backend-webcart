@@ -9,7 +9,10 @@ const UserCarts = require('./models/userdb');
 
 app.use(cors());
 app.use(express.json())
-mongoose.connect('mongodb://localhost:27017/Cartofusers');
+mongoose.connect('mongodb://localhost:27017/Cartofusers',()=>{
+    console.log("connected");
+});
+
 
 app.post('/api/register', async (req, res) => {
     
@@ -18,14 +21,16 @@ app.post('/api/register', async (req, res) => {
           await UserCarts.create(req.body);
           res.json({ status : "ok"})
 
-        
     
-        
-       
     }
     catch(err){
         console.log(err);
-        res.json({ status:'error', error:"Duplicate email"})
+        if(err.code == 11000){
+            res.json({ status : "error", error: "Email already exists"})
+        }
+        else{
+            res.json({ status : "error", error: "Enter a valid email id"})
+        }
     }
 })
 
@@ -50,11 +55,10 @@ app.post('/api/login', async (req, res) => {
     }
 })
 
-// write a code to copy one array into another
- 
- 
 
-
+ 
+   
+ 
 app.get('/api/cart', async (req,res)=>{
     const token = req.headers['x-access-token'];
     try {
@@ -75,6 +79,7 @@ app.post('/api/acart', async (req,res)=>{
         const email = decoded.email;
         const user = await UserCarts.findOne({email: email});
         user.cart.push(req.body);
+        console.log(user.cart);
         await user.save();
         return res.json({status: 'ok', cart: user.cart});
     } catch (error) {
@@ -91,17 +96,18 @@ app.put('/api/aqty',async (req,res)=>{
         const user = await UserCarts.findOne({email: email});
         console.log(req.body);
         user.cart.forEach(element => {
-            
+           
             if(element.prod.id === req.body.id){
-               
-                element.prod.quantity = req.body.quantity+1;   
+                
+                element.prod.quantity = req.body.quantity+1;
+                
             }
 
 
         }
     
         );
-        
+       
         await user.updateOne({cart: user.cart});
         return res.json({status: 'ok', cart: user.cart});
         
@@ -119,12 +125,14 @@ app.put('/api/dqty',async (req,res)=>{
         const user = await UserCarts.findOne({email: email});
         console.log(req.body);
         user.cart.forEach(element => {
-            
+           
             if(element.prod.id === req.body.id){
-                console.log(req.body + "pp");
+               
                 if(element.prod.quantity > 1){
                 element.prod.quantity = req.body.quantity-1;
                 }
+                
+                console.log(element.prod.quantity + "xx");
                
             }
 
@@ -132,7 +140,8 @@ app.put('/api/dqty',async (req,res)=>{
         }
     
         );
-        
+       
+        console.log(user)
         await user.updateOne({cart: user.cart});
         return res.json({status: 'ok', cart: user.cart});
         
@@ -148,9 +157,22 @@ app.delete('/api/dcart', async (req,res)=>{
         const decoded = jwt.verify(token, 'secret');
         const email = decoded.email;
         const user = await UserCarts.findOne({email: email});
-        user.cart.splice(user.cart.indexOf(req.body),1);
+        console.log(req.body);
+        
+        console.log(user.cart);
+        user.cart.forEach(element => {
+           
+            if(element.prod.id === req.body.prod.id){
+                
+                user.cart.splice(user.cart.indexOf(element),1);
+               
+            }
+
+        })
         
         await user.save();
+       
+        
         return res.json({status: 'ok', cart: user.cart});
     } catch (error) {
         console.log(error);
