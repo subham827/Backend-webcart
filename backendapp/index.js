@@ -43,6 +43,7 @@ app.post('/api/login', async (req, res) => {
             const token = jwt.sign({email: user.email}, 'secret')
         return res.json({status: 'ok', user: token})
        }
+       
        else{
             console.log("not ok");
 
@@ -51,6 +52,7 @@ app.post('/api/login', async (req, res) => {
     }
     catch(err){
         res.send(err);
+
 
     }
 })
