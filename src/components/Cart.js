@@ -82,7 +82,7 @@ const Cart = ({ carte, setCarte }) => {
             );
           })
         ) : (
-          <div>No items in cart</div>
+          <div>Oops should not have reloaded the page. No worries go to <Link to="/">Home page</Link></div>
         )}
           </Col>
         </Row>
