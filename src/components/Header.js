@@ -7,7 +7,7 @@ import { CartState } from '../Context/Context'
 import { useLocation } from 'react-router-dom'
 import { FormControl } from 'react-bootstrap'
 import "../style/index.css";
-const Header = ({carte,setLog,name}) => {
+const Header = ({carte,setLog,name,i,setI}) => {
   
     const {
         state: { cart },
@@ -43,6 +43,7 @@ const Header = ({carte,setLog,name}) => {
               placeholder="Search a product..."
               className="m-auto search"
               aria-label="Search"
+              onClick={()=> setI(0)}
               onChange={(e) => {
                 productDispatch({
                   type: "FILTER_BY_SEARCH",
